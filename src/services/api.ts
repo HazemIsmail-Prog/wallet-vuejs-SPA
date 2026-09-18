@@ -17,7 +17,7 @@ export function setCsrfToken(token: string | null): void {
 
 app.interceptors.request.use((config) => {
   if (csrfToken) {
-    config.headers['X-XSRF-TOKEN'] = csrfToken
+    config.headers['X-CSRF-TOKEN'] = csrfToken
   }
 
   return config
