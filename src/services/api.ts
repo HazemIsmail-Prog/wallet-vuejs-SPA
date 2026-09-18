@@ -6,6 +6,7 @@ const app = axios.create({
   withCredentials: true,
   xsrfCookieName: 'XSRF-TOKEN',
   xsrfHeaderName: 'X-XSRF-TOKEN',
+  withXSRFToken: true,
 })
 
 app.interceptors.response.use(
