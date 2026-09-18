@@ -1,4 +1,4 @@
-import app from './api'
+import app, { setCsrfToken } from './api'
 import type {
   ApiResponse,
   Category,
@@ -15,6 +15,8 @@ import type {
 
 export async function getCsrf(): Promise<void> {
   await app.get('/sanctum/csrf-cookie')
+  const { data } = await app.get<{ token: string }>('/api/csrf-token')
+  setCsrfToken(data.token)
 }
 
 export async function login(email: string, password: string): Promise<User> {

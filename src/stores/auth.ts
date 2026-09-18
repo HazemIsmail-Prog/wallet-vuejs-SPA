@@ -25,6 +25,7 @@ export const useAuthStore = defineStore('auth', {
 
     async logout(): Promise<void> {
       try {
+        await api.getCsrf()
         await api.logout()
       } catch {
         // Session may already be expired — still reset locally.

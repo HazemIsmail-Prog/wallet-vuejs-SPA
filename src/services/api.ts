@@ -9,6 +9,20 @@ const app = axios.create({
   withXSRFToken: true,
 })
 
+let csrfToken: string | null = null
+
+export function setCsrfToken(token: string | null): void {
+  csrfToken = token
+}
+
+app.interceptors.request.use((config) => {
+  if (csrfToken) {
+    config.headers['X-XSRF-TOKEN'] = csrfToken
+  }
+
+  return config
+})
+
 app.interceptors.response.use(
   (response) => response,
   (error: AxiosError<ApiError>) => {
